@@ -10,8 +10,8 @@ const apiURL = process.env.REACT_APP_BE_URL
 const BlogItem = (props) => {
   const deletePost = async (e) => {
     e.preventDefault()
-    const response = await fetch(`${apiURL}/posts/${props._id}`, {
-      method: "DELETE",
+    const response = await fetch(`https://strive-blog-backend.herokuapp.com/posts/${props._id}`, {
+      method: "DELETE", 
     })
     if (response.ok) {
       props.refresh()

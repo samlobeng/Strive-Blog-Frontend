@@ -7,7 +7,7 @@ const BlogList = () => {
  
   const fetchPosts = async () => {
     const apiURL = process.env.REACT_APP_BE_URL
-    const response = await fetch(`${apiURL}/posts`)
+    const response = await fetch("https://strive-blog-backend.herokuapp.com/posts")
     if (response.ok) {
       const data = await response.json()
       console.log(data)
