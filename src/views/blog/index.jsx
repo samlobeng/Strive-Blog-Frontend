@@ -5,8 +5,9 @@ import BlogAuthor from "../../components/blog/blog-author"
 import "./styles.css"
 const Blog = (props) => {
   const [post, setPost] = useState(null)
-  const apiURL = process.env.REACT_APP_BE_URL
+
   const fetchPost = async () => {
+    const apiURL = process.env.REACT_APP_BE_URL
     const response = await fetch(
       `${apiURL}/posts/${props.match.params.id}`
     )

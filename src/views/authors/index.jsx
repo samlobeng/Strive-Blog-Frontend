@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom'
 import "./styles.css"
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import { MdEdit } from 'react-icons/md'
-
+const apiURL = process.env.REACT_APP_BE_URL
 const Authors = props => {
-
+    const apiURL = process.env.REACT_APP_BE_URL
     const [authors, setAuthors] = useState([])
 
     const fetchAuthors = async () => {
-        const response = await fetch("http://localhost:3001/authors")
+        const response = await fetch(`${apiURL}/authors`)
         if(response.ok) {
             const data = await response.json()
             setAuthors(data)
@@ -49,7 +49,7 @@ export default withRouter(Authors);
 const AuthorCard = (props) => {
 
     const deleteAuthor = async (id) => {
-        const response = await fetch(`http://localhost:3001/authors/${id}`, {
+        const response = await fetch(`${apiURL}/authors/${id}`, {
             method: "DELETE"
         })
         if(response.ok) {

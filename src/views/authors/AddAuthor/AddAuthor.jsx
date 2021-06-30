@@ -3,7 +3,7 @@ import { Container, Form, Col, Button, Row } from 'react-bootstrap'
 import './styles.css'
 
 const AddAuthor = (props) => {
-
+    const apiURL = process.env.REACT_APP_BE_URL
     const [data, setData] = useState({name: '', surname: '', email: '', dob: ''})
 
     const changeData = (e) => {
@@ -11,7 +11,8 @@ const AddAuthor = (props) => {
     }
 
     const fetchAuthor = async (id) => {
-        const response = await fetch("http://localhost:3001/authors/" + id)
+        
+        const response = await fetch(`${apiURL}/authors/${id}`)
         if(response.ok) {
             const authorData = await response.json()
             setData(authorData)
@@ -27,7 +28,7 @@ const AddAuthor = (props) => {
     }, [])
 
     const postAuthor = async () => {
-        const response = await fetch("http://localhost:3001/authors", {
+        const response = await fetch(`${apiURL}/authors`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -44,7 +45,7 @@ const AddAuthor = (props) => {
     }
 
     const editAuthor = async () => {
-        const response = await fetch("http://localhost:3001/authors/" + data._id, {
+        const response = await fetch(`${apiURL}/authors/${data._id}`, {
             method: "PUT",
             body: JSON.stringify(data),
             headers: {
