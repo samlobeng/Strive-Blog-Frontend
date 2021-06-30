@@ -7,6 +7,7 @@ import "./styles.css"
 const NewBlogPost = (props) => {
   const [categories, setCategories] = useState(null)
   const [authors, setAuthors] = useState(null)
+  const apiURL = process.env.REACT_APP_BE_URL
   const [form, setForm] = useState({
     category: "",
     title: "",
@@ -18,7 +19,7 @@ const NewBlogPost = (props) => {
   const [newCategory, setNewCategory] = useState(false)
 
   const fetchPost = async (id) => {
-    const response = await fetch("http://localhost:3001/posts/" + id)
+    const response = await fetch(`${apiURL}/posts/${id}`)
     if (response.ok) {
       const data = await response.json()
       setForm(data)
@@ -28,7 +29,7 @@ const NewBlogPost = (props) => {
   }
 
   const fetchAuthors = async () => {
-    const response = await fetch("http://localhost:3001/authors")
+    const response = await fetch(`${apiURL}/authors`)
     if (response.ok) {
       const data = await response.json()
       setAuthors(data)
@@ -39,7 +40,7 @@ const NewBlogPost = (props) => {
   }
 
   const fetchCategories = async () => {
-    const response = await fetch("http://localhost:3001/posts")
+    const response = await fetch(`${apiURL}/posts`)
     if (response.ok) {
       const data = await response.json()
       setCategories(Array.from(new Set(data.map((p) => p.category))))
@@ -61,7 +62,7 @@ const NewBlogPost = (props) => {
   }
 
   const postPost = async () => {
-    const response = await fetch("http://localhost:3001/posts", {
+    const response = await fetch(`${apiURL}/posts`, {
       method: "POST",
       body: JSON.stringify(form),
       headers: {
@@ -77,7 +78,7 @@ const NewBlogPost = (props) => {
   }
 
   const editPost = async () => {
-    const response = await fetch("http://localhost:3001/posts/" + form._id, {
+    const response = await fetch(`${apiURL}/posts/${form._id}`, {
       method: "PUT",
       body: JSON.stringify(form),
       headers: {

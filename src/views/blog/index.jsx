@@ -5,10 +5,10 @@ import BlogAuthor from "../../components/blog/blog-author"
 import "./styles.css"
 const Blog = (props) => {
   const [post, setPost] = useState(null)
-
+  const apiURL = process.env.REACT_APP_BE_URL
   const fetchPost = async () => {
     const response = await fetch(
-      "http://localhost:3001/posts/" + props.match.params.id
+      `${apiURL}/posts/${props.match.params.id}`
     )
     if (response.ok) {
       const data = await response.json()
